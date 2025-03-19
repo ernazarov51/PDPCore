@@ -1,0 +1,43 @@
+[
+    {
+        "model": "apps.science",
+        "pk": 1,
+        "fields": {
+            "name": "Matematika"
+        }
+    },
+    {
+        "model": "apps.science",
+        "pk": 2,
+        "fields": {
+            "name": "Fizika"
+        }
+    },
+    {
+        "model": "apps.task",
+        "pk": 1,
+        "fields": {
+            "science": 1,
+            "title": "Algebra asoslari",
+            "total": 10
+        }
+    },
+    {
+        "model": "apps.task",
+        "pk": 2,
+        "fields": {
+            "science": 1,
+            "title": "Geometriya asoslari",
+            "total": 15
+        }
+    },
+    {
+        "model": "apps.task",
+        "pk": 3,
+        "fields": {
+            "science": 2,
+            "title": "Harakat qonunlari",
+            "total": 20
+        }
+    }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time JSON Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Real-Time JSON Data</h2>
+<pre id="json-output">Waiting for data...</pre>
+
+<script>
+    const socket = new WebSocket(`ws://${window.location.host}/ws/leaderboard/`);
+
+    socket.onopen = function () {
+        console.log("🟢 WebSocket connection established.");
+    };
+
+    socket.onmessage = function (event) {
+        console.log("📥 WebSocket Data:", event.data);
+        try {
+            const jsonData = JSON.parse(event.data); // 🔥 JSON obyektga o‘giramiz
+            document.getElementById("json-output").textContent = JSON.stringify(jsonData, null, 4); // ✅ 4 ta bo‘shliq bilan chiroyli chiqaramiz
+        } catch (error) {
+            console.error("🚨 JSON Parsing Error:", error);
+            document.getElementById("json-output").textContent = "❌ Error parsing JSON data!";
+        }
+    };
+
+    socket.onclose = function () {
+        console.log("🔴 WebSocket connection closed.");
+    };
+
+    socket.onerror = function (error) {
+        console.error("🚨 WebSocket Error:", error);
+    };
+</script>
+
+</body>
+</html>
