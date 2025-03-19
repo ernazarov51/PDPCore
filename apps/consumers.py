@@ -40,7 +40,7 @@ class LeaderBoard(AsyncWebsocketConsumer):
             {"place": place,
              "id": user.id,
              "avatar": user.avatar.url,
-             "gpa": float(user.gpa),
+             "gpa": float(user.gpa) if user.gpa is not None else 0.0,
              "full_name": f'{user.first_name} {user.last_name}',
              "sciences": [{"name": x.name, "percentage": 0, "rank": 1} for x in Science.objects.filter(users__user=user)]
              }

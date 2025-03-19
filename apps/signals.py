@@ -15,7 +15,7 @@ def student_updated(sender, instance, **kwargs):
             {"place": place,
              "id": user.id,
              "avatar": user.avatar.url,
-             "gpa":float(user.gpa),
+             "gpa":float(user.gpa) if user.gpa is not None else 0.0,
              "full_name": f'{user.first_name} {user.last_name}',
              }
             for place, user in enumerate(users, start=1)
